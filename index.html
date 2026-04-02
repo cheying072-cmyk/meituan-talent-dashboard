@@ -757,11 +757,11 @@ function renderTable() {
   }
 
   const tbody = document.getElementById('table-body');
-  tbody.innerHTML = data.map((p, idx) => { p.idx = idx;
+  tbody.innerHTML = data.map(p => {
     const ii = p.interviewInfo;
     const dash = '<span class="dash">—</span>';
     return `<tr>
-      <td><a class="name-link" href="#" onclick="showProfile(${p.idx}); return false;">${p.name||'—'}</a></td>
+      <td><a class="name-link" href="https://hr.xiaohongshu.com/talent-pool/common/club-recruit?keyword=${encodeURIComponent(p.name||'')}&keywordCategory=name" target="_blank">${p.name||'—'}</a></td>
       <td>${p.age||dash}</td>
       <td title="${p.highestSchool||''}">${(p.highestSchool||'').slice(0,12)||dash}</td>
       <td title="${p.major||''}">${(p.major||'').slice(0,12)||dash}</td>
