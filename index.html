@@ -269,6 +269,12 @@
         <canvas id="chart-bu"></canvas>
       </div>
       <div class="chart-note">*数据来源为人才库985学校样本，不代表实际编制</div>
+      <div id="other-dept-toggle" style="margin-top:12px;">
+        <button onclick="toggleOtherDept()" style="background:#E8F5E9;border:1px solid #A5D6A7;color:#2E7D32;padding:7px 16px;border-radius:8px;cursor:pointer;font-size:13px;font-weight:600;">
+          📋 查看「其他/未知」事业部明细 ▼
+        </button>
+        <div id="other-dept-content" style="display:none;margin-top:12px;max-height:320px;overflow-y:auto;"></div>
+      </div>
     </div>
   </div>
 
@@ -370,17 +376,32 @@ const DATA = [{"talentId": "725357", "name": "修玉皎", "age": 34, "currentLoc
 
 // ========== 事业群映射 ==========
 const BU_MAP = {
-  "核心本地商业": ["点评","到餐","服务零售","酒店","旅行","外卖","到家","履约","闪购","医药","健康","下沉","美团平台","基础研发","业务研发","商业增值","平台及职能","核心本地"],
-  "食杂零售": ["快驴","小象","快乐猴","Keemart","公共部门","食杂"],
-  "Keeta（海外）": ["Keeta","keeta","海外"],
-  "软硬件服务": ["餐饮SaaS","酒店SaaS","无人车","Peppr","充电宝","骑行","软件研发","硬件","软硬件合规"],
-  "无人机业务部": ["无人机"],
-  "金融服务平台": ["金融服务","金融平台"],
-  "战略与投资平台": ["战略与投资","战略投资"],
-  "财务平台": ["财务平台","财务部"],
-  "公司事务平台": ["公司事务","法务","审计"],
-  "人力资源平台": ["人力资源","HR"],
-  "GN06": ["GN06"],
+  "核心本地商业": [
+    "点评","到餐","服务零售","酒店","旅行","外卖","到家","履约","闪购","医药","健康","到店","到综",
+    "下沉","核心本地","业务研发","商业增值","平台及职能",
+    "住宿","民宿","景点","酒旅","配送","服务体验","体验与治理","商业分析","到餐","丽人","医美",
+    "外卖配送","出行","打车","网约车","路线","地图"
+  ],
+  "食杂零售": [
+    "快驴","小象","优选","快乐猴","Keemart","食杂","买菜","闪电仓","前置仓","团好货","优选事业","小象超市"
+  ],
+  "Keeta（海外）": ["Keeta","keeta","海外","境外"],
+  "软硬件服务": [
+    "餐饮SaaS","酒店SaaS","saas","SaaS","Peppr","充电宝","骑行","单车","电单车",
+    "无人车","自动车","无人配送","自动配送","软件研发","硬件","软硬件","餐管"
+  ],
+  "无人机": ["无人机"],
+  "金融": ["金融服务","金融平台","金融与服务","月付","支付","信贷","风险","反爬","信安","美团金服","美团金融","美团金服","月付"],
+  "战略投资": ["战略与投资","战略投资","战略管理","战略发展","战略规划","公共战略","战投","战略分析"],
+  "财务": ["财务平台","财务部","财务BP","财务分析","审计","采购","内控","财务运营"],
+  "人力": ["人力资源","HR","组织文化","组织发展","招聘"],
+  "公共事务": ["公司事务","法务","政府事务","政策研究","法律","公共政策"],
+  "基础研发平台": [
+    "基础研发平台","基础技术","机器学习平台","AI平台","基础平台","语音交互","视觉智能",
+    "NLP中心","搜索推荐","推荐算法","搜索技术","大模型","LongCat","M17","FMG","Hi Lab",
+    "数据智能","数据运营","数据开发","数据分析中心","基础模型","基座模型","长文本","搜索与NLP",
+    "美团平台","平台技术","基础服务","企业平台","基础研发"
+  ],
   "其他/未知": []
 };
 
@@ -692,6 +713,32 @@ function applyFilters() {
   renderTable();
 }
 
+function renderOtherDept() {
+  const otherPeople = DATA.filter(p => getBU(p) === "其他/未知");
+  const deptCount = {};
+  otherPeople.forEach(p => {
+    const jobs = p.meituan_jobs || [];
+    if (jobs.length === 0) {
+      deptCount["（无部门信息）"] = (deptCount["（无部门信息）"] || 0) + 1;
+    } else {
+      jobs.forEach(j => {
+        const d = (j.dept || "（部门未填写）").substring(0, 30);
+        deptCount[d] = (deptCount[d] || 0) + 1;
+      });
+    }
+  });
+  const sorted = Object.entries(deptCount).sort((a,b) => b[1]-a[1]);
+  const el = document.getElementById('other-dept-content');
+  if (!el) return;
+  el.innerHTML = `<p style="font-size:13px;color:#888;margin-bottom:12px;column-span:all">共 ${otherPeople.length} 人未能归类，涉及 ${sorted.length} 个部门</p>` +
+    sorted.map(([dept, cnt]) =>
+      `<div style="display:flex;justify-content:space-between;padding:6px 10px;margin-bottom:4px;background:#F1F8E9;border-radius:6px;break-inside:avoid;">
+        <span style="font-size:13px;color:#333;flex:1;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;" title="${dept}">${dept}</span>
+        <span style="font-size:13px;font-weight:700;color:#2E7D32;margin-left:8px;">${cnt}</span>
+      </div>`
+    ).join('');
+}
+
 function resetFilters() {
   document.getElementById('f-bu').value = '';
   document.getElementById('f-title').value = '';
@@ -915,6 +962,47 @@ document.addEventListener('keydown', e => { if(e.key==='Escape') closeModal(); }
 
 // 需要让 filteredData 在外部可访问
 let filteredData = [];
+
+function renderOtherDept() {
+  const otherPeople = DATA.filter(p => getBU(p) === "其他/未知");
+  const deptCount = {};
+  otherPeople.forEach(p => {
+    const jobs = p.meituan_jobs || [];
+    if (jobs.length === 0) {
+      deptCount["（无部门信息）"] = (deptCount["（无部门信息）"] || 0) + 1;
+    } else {
+      jobs.forEach(j => {
+        const d = (j.dept || "（部门未填写）").trim().substring(0, 35);
+        if (d) deptCount[d] = (deptCount[d] || 0) + 1;
+      });
+    }
+  });
+  const sorted = Object.entries(deptCount).sort((a,b) => b[1]-a[1]);
+  const el = document.getElementById('other-dept-content');
+  if (!el) return;
+  el.innerHTML = `<div style="font-size:12px;color:#666;margin-bottom:10px;padding:8px;background:#FFF8E1;border-radius:6px;">共 <b>${otherPeople.length}</b> 人未能归类，涉及 <b>${sorted.length}</b> 个部门</div>` +
+    '<div style="columns:2;column-gap:16px;">' +
+    sorted.map(([dept, cnt]) =>
+      `<div style="display:flex;justify-content:space-between;padding:5px 8px;margin-bottom:3px;background:#F1F8E9;border-radius:5px;break-inside:avoid;">
+        <span style="font-size:12px;color:#333;flex:1;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;" title="${dept}">${dept}</span>
+        <span style="font-size:12px;font-weight:700;color:#2E7D32;margin-left:6px;">${cnt}</span>
+      </div>`
+    ).join('') + '</div>';
+}
+
+function toggleOtherDept() {
+  const el = document.getElementById('other-dept-content');
+  const btn = document.querySelector('#other-dept-toggle button');
+  if (!el) return;
+  if (el.style.display === 'none') {
+    renderOtherDept();
+    el.style.display = 'block';
+    btn.textContent = '📋 收起「其他/未知」明细 ▲';
+  } else {
+    el.style.display = 'none';
+    btn.textContent = '📋 查看「其他/未知」事业部明细 ▼';
+  }
+}
 </script>
 
 </body>
