@@ -285,10 +285,10 @@
     transition: all 0.15s;
   }
   .arch-panel-close:hover { border-color: #3949AB; color: #3949AB; }
-  .arch-panel-list { display: flex; flex-direction: column; gap: 0; }
+  .arch-panel-list { display: flex; flex-direction: column; gap: 0; overflow-x: auto; }
   .arch-panel-header-row {
     display: grid;
-    grid-template-columns: 90px 40px 1fr 120px 100px 160px;
+    grid-template-columns: 88px 34px 140px 150px 108px 150px;
     gap: 0;
     padding: 5px 12px;
     font-size: 11px;
@@ -300,14 +300,14 @@
   }
   .arch-panel-row {
     display: grid;
-    grid-template-columns: 90px 40px 1fr 120px 100px 160px;
+    grid-template-columns: 88px 34px 140px 150px 108px 150px;
     align-items: center;
     padding: 8px 12px;
     font-size: 13px;
     gap: 0;
-    border-bottom: 1px solid #f4f4f4;
+    border-bottom: 1px solid #f0f0f0;
   }
-  .arch-panel-row:hover { background: #F5F8FF; }
+  .arch-panel-row:hover { background: #F0F4FF; }
   .arch-panel-name {
     font-weight: 700;
     color: #3949AB;
@@ -1263,7 +1263,7 @@ function showArchPanel(deptName, keywords) {
   if (matched.length === 0) {
     listEl.innerHTML = `<div class="arch-panel-empty">暂未找到匹配该部门的候选人</div>`;
   } else {
-    const colWidths = '90px 40px 1fr 90px 90px 1fr';
+    const colWidths = '88px 34px 140px 160px 108px 150px';
     const header = `<div class="arch-panel-header-row" style="grid-template-columns:${colWidths};">
       <span>姓名</span><span>年龄</span><span>当前部门</span><span>本科</span><span>最高学历</span><span>最近面试岗位</span>
     </div>`;
