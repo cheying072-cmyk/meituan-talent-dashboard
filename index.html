@@ -242,6 +242,14 @@
     border: 1.5px solid #A5D6A7;
   }
   .dept-chip:hover { background: #A5D6A7; box-shadow: 0 2px 8px rgba(46,125,50,0.18); }
+  .dept-chip.key {
+    background: #2E7D32;
+    color: white;
+    border-color: #2E7D32;
+    font-weight: 600;
+  }
+  .dept-chip.key:hover { background: #1B5E20; box-shadow: 0 2px 8px rgba(27,94,32,0.3); }
+  .dept-chip.key.active { background: #1B5E20; border-color: #1B5E20; }
   .dept-chip.active {
     background: #2E7D32;
     color: white;
@@ -353,16 +361,16 @@
       <div class="arch-col">
         <div class="arch-col-title">核心本地商业</div>
         <div class="arch-chips">
-          <span class="dept-chip" onclick="showArchPanel('点评事业部', ['点评'])">点评事业部</span>
-          <span class="dept-chip" onclick="showArchPanel('到餐事业部', ['到餐'])">到餐事业部</span>
-          <span class="dept-chip" onclick="showArchPanel('服务零售事业部', ['服务零售'])">服务零售事业部</span>
-          <span class="dept-chip" onclick="showArchPanel('酒店旅行', ['酒旅','酒店旅行','住宿'])">酒店旅行</span>
-          <span class="dept-chip" onclick="showArchPanel('外卖事业部', ['外卖'])">外卖事业部</span>
-          <span class="dept-chip" onclick="showArchPanel('到家履约平台', ['到家履约'])">到家履约平台</span>
-          <span class="dept-chip" onclick="showArchPanel('闪购事业部', ['闪购'])">闪购事业部</span>
-          <span class="dept-chip" onclick="showArchPanel('核心本地商业商分', ['核心本地商业'])">核心本地商业商分</span>
-          <span class="dept-chip" onclick="showArchPanel('平台', ['平台'])">平台</span>
-          <span class="dept-chip" onclick="showArchPanel('LBS', ['LBS','lbs'])">LBS</span>
+          <span class="dept-chip key" onclick="showArchPanel('点评事业部', ['点评'])">点评事业部</span>
+          <span class="dept-chip key" onclick="showArchPanel('到餐事业部', ['到餐'])">到餐事业部</span>
+          <span class="dept-chip key" onclick="showArchPanel('服务零售事业部', ['服务零售'])">服务零售事业部</span>
+          <span class="dept-chip key" onclick="showArchPanel('酒店旅行', ['酒旅','酒店旅行','住宿'])">酒店旅行</span>
+          <span class="dept-chip key" onclick="showArchPanel('外卖事业部', ['外卖'])">外卖事业部</span>
+          <span class="dept-chip key" onclick="showArchPanel('到家履约平台', ['到家履约'])">到家履约平台</span>
+          <span class="dept-chip key" onclick="showArchPanel('闪购事业部', ['闪购'])">闪购事业部</span>
+          <span class="dept-chip key" onclick="showArchPanel('核心本地商业商分', ['核心本地商业'])">核心本地商业商分</span>
+          <span class="dept-chip key" onclick="showArchPanel('平台', ['平台'])">平台</span>
+          <span class="dept-chip key" onclick="showArchPanel('LBS', ['LBS','lbs'])">LBS</span>
         </div>
       </div>
       <!-- 列2：食杂零售 / Keeta / 软硬件服务 -->
@@ -374,7 +382,7 @@
         <div style="margin-top:14px;">
           <div class="arch-col-title">Keeta</div>
           <div class="arch-chips">
-            <span class="dept-chip" onclick="showArchPanel('Keeta', ['Keeta','keeta'])">Keeta</span>
+            <span class="dept-chip key" onclick="showArchPanel('Keeta', ['Keeta','keeta'])">Keeta</span>
           </div>
         </div>
         <div style="margin-top:14px;">
