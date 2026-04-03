@@ -296,7 +296,7 @@
   .arch-panel-list { display: flex; flex-direction: column; gap: 0; overflow-x: auto; }
   .arch-panel-header-row {
     display: grid;
-    grid-template-columns: 88px 34px 130px 140px 90px 1fr;
+    grid-template-columns: 80px 34px 160px 200px 1fr;
     gap: 12px;
     padding: 5px 12px;
     font-size: 11px;
@@ -308,7 +308,7 @@
   }
   .arch-panel-row {
     display: grid;
-    grid-template-columns: 88px 34px 130px 140px 90px 1fr;
+    grid-template-columns: 80px 34px 160px 200px 1fr;
     align-items: center;
     padding: 8px 12px;
     font-size: 13px;
@@ -1271,9 +1271,9 @@ function showArchPanel(deptName, keywords) {
   if (matched.length === 0) {
     listEl.innerHTML = `<div class="arch-panel-empty">暂未找到匹配该部门的候选人</div>`;
   } else {
-    const colWidths = '88px 34px 130px 140px 90px 1fr';
+    const colWidths = '80px 34px 160px 200px 1fr';
     const header = `<div class="arch-panel-header-row" style="grid-template-columns:${colWidths};">
-      <span>姓名</span><span>年龄</span><span>当前部门</span><span>本科</span><span>最高学历</span><span>最近面试岗位</span>
+      <span>姓名</span><span>年龄</span><span>当前部门</span><span>本科·专业</span><span>最近面试岗位</span>
     </div>`;
 
     const rows = matched.map(p => {
@@ -1308,7 +1308,6 @@ function showArchPanel(deptName, keywords) {
         <span class="arch-cell-age">${age}</span>
         <span class="arch-cell-dept" title="${dept}">${dept}</span>
         <span class="arch-cell-school" title="${bkStr}">${bkStr}</span>
-        <span class="arch-cell-deg">${highStr}</span>
         <span class="arch-cell-dept" title="${recentPos}">${recentPos}</span>
       </div>`;
     }).join('');
