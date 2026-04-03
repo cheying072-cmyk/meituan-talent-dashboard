@@ -185,128 +185,74 @@
   }
 
   /* 架构图模块 */
+  /* 架构图模块 */
   .arch-module {
     background: white;
     border-radius: 12px;
     box-shadow: 0 2px 10px rgba(0,0,0,0.08);
     margin-bottom: 20px;
-    overflow: hidden;
+    padding: 18px 20px 14px;
   }
-  .arch-header {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    padding: 14px 20px;
-    background: white;
-    border-bottom: 2px solid #A5D6A7;
-    cursor: pointer;
-    user-select: none;
-  }
-  .arch-header-left {
-    display: flex;
-    align-items: center;
-    gap: 10px;
-  }
-  .arch-header-title {
+  .arch-module-title {
     font-size: 15px;
     font-weight: 700;
     color: #2E7D32;
+    margin-bottom: 14px;
+    padding-bottom: 10px;
+    border-bottom: 2px solid #A5D6A7;
   }
-  .arch-header-sub {
+  .arch-module-sub {
     font-size: 12px;
     color: #999;
+    font-weight: 400;
+    margin-left: 8px;
   }
-  .arch-toggle-btn {
-    background: #F1F8E9;
-    border: 1px solid #A5D6A7;
-    color: #2E7D32;
-    border-radius: 6px;
-    padding: 4px 12px;
-    cursor: pointer;
-    font-size: 13px;
-    font-weight: 600;
-    transition: background 0.2s;
-  }
-  .arch-toggle-btn:hover { background: #A5D6A7; }
-  .arch-body {
-    padding: 20px;
-    display: none;
-  }
-  .arch-body.open { display: block; }
   .arch-grid {
     display: grid;
-    grid-template-columns: 1fr 0.55fr 0.55fr;
-    gap: 16px;
+    grid-template-columns: 1.6fr 0.8fr 0.8fr 0.8fr;
+    gap: 14px;
+    align-items: start;
   }
   .arch-col {}
   .arch-col-title {
-    font-size: 17px;
+    font-size: 12px;
     font-weight: 700;
-    margin-bottom: 12px;
-    padding: 8px 14px;
-    border-radius: 8px;
-    display: inline-block;
-  }
-  .arch-col-title.highlight {
-    background: #E3F2FD;
-    color: #1565C0;
-    border: 1.5px solid #1565C0;
-  }
-  .arch-col-title.gray {
-    background: #F5F5F5;
-    color: #666;
-    border: 1.5px solid #ddd;
+    margin-bottom: 10px;
+    color: #999;
+    letter-spacing: 0.5px;
+    text-transform: uppercase;
   }
   .arch-chips {
     display: flex;
     flex-wrap: wrap;
-    gap: 8px;
-  }
-  .arch-chips.vertical {
-    flex-direction: column;
-    flex-wrap: nowrap;
-    gap: 6px;
+    gap: 7px;
   }
   .dept-chip {
     display: inline-flex;
     align-items: center;
-    padding: 5px 13px;
+    padding: 5px 12px;
     border-radius: 20px;
     font-size: 13px;
-    font-weight: 600;
+    font-weight: 500;
     cursor: pointer;
     transition: all 0.18s;
     white-space: nowrap;
+    background: #EEF2FF;
+    color: #3949AB;
+    border: 1.5px solid #C5CAE9;
   }
-  .dept-chip.red {
-    background: #1565C0;
-    color: white;
-    border: 1.5px solid #1565C0;
-  }
-  .dept-chip.red:hover { background: #0d47a1; box-shadow: 0 2px 8px rgba(21,101,192,0.35); }
-  .dept-chip.gray-chip {
-    background: #F0F0F0;
-    color: #555;
-    border: 1.5px solid #ddd;
-  }
-  .dept-chip.gray-chip:hover { background: #e0e0e0; box-shadow: 0 2px 6px rgba(0,0,0,0.1); }
-  .dept-chip.highlight-chip {
-    background: #E3F2FD;
-    color: #1565C0;
-    border: 1.5px solid #1565C0;
-    font-weight: 700;
-  }
-  .dept-chip.highlight-chip:hover { background: #ffe0d6; box-shadow: 0 2px 8px rgba(255,94,58,0.25); }
+  .dept-chip:hover { background: #C5CAE9; box-shadow: 0 2px 8px rgba(57,73,171,0.18); }
   .dept-chip.active {
-    outline: 2.5px solid #2E7D32;
-    outline-offset: 2px;
+    background: #3949AB;
+    color: white;
+    border-color: #3949AB;
   }
 
   /* 架构图候选人面板 */
   .arch-panel {
-    margin-top: 16px;
+    margin-top: 14px;
     border-top: 1.5px solid #eee;
-    padding-top: 16px;
+    padding-top: 14px;
     display: none;
   }
   .arch-panel.open {
@@ -314,19 +260,19 @@
     animation: slideDown 0.22s ease;
   }
   @keyframes slideDown {
-    from { opacity: 0; transform: translateY(-10px); }
+    from { opacity: 0; transform: translateY(-8px); }
     to   { opacity: 1; transform: translateY(0); }
   }
   .arch-panel-header {
     display: flex;
     align-items: center;
     justify-content: space-between;
-    margin-bottom: 12px;
+    margin-bottom: 10px;
   }
   .arch-panel-title {
     font-size: 14px;
     font-weight: 700;
-    color: #1565C0;
+    color: #3949AB;
   }
   .arch-panel-close {
     background: none;
@@ -338,45 +284,50 @@
     color: #888;
     transition: all 0.15s;
   }
-  .arch-panel-close:hover { border-color: #1565C0; color: #1565C0; }
-  .arch-panel-list {
+  .arch-panel-close:hover { border-color: #3949AB; color: #3949AB; }
+  .arch-panel-list { display: flex; flex-direction: column; gap: 0; }
+  .arch-panel-header-row {
     display: grid;
-    gap: 6px;
+    grid-template-columns: 90px 40px 1fr 120px 100px 160px;
+    gap: 0;
+    padding: 5px 12px;
+    font-size: 11px;
+    color: #aaa;
+    font-weight: 600;
+    letter-spacing: 0.4px;
+    border-bottom: 1.5px solid #eee;
+    margin-bottom: 2px;
   }
   .arch-panel-row {
     display: grid;
-    grid-template-columns: 1.2fr 0.5fr 1.5fr 1.8fr 1.8fr 1.5fr;
+    grid-template-columns: 90px 40px 1fr 120px 100px 160px;
     align-items: center;
-    background: #FFF8F6;
-    border: 1px solid #FFD5C8;
-    border-radius: 8px;
-    padding: 8px 14px;
+    padding: 8px 12px;
     font-size: 13px;
-    gap: 8px;
+    gap: 0;
+    border-bottom: 1px solid #f4f4f4;
   }
-  .arch-panel-row:hover { background: #E3F2FD; }
+  .arch-panel-row:hover { background: #F5F8FF; }
   .arch-panel-name {
     font-weight: 700;
-    color: #1565C0;
+    color: #3949AB;
     text-decoration: none;
     white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
   }
   .arch-panel-name:hover { text-decoration: underline; }
-  .arch-panel-dept { color: #555; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
-  .arch-panel-edu { color: #888; white-space: nowrap; }
-  .arch-panel-status { white-space: nowrap; font-weight: 600; }
+  .arch-cell-age { color: #777; }
+  .arch-cell-dept { color: #444; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; padding-right: 8px; }
+  .arch-cell-deg { color: #555; white-space: nowrap; }
+  .arch-cell-major { color: #777; white-space: nowrap; }
+  .arch-cell-school { color: #555; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
   .arch-panel-empty {
     text-align: center;
     color: #bbb;
     padding: 20px;
     font-size: 13px;
   }
-  .arch-divider {
-    height: 1px;
-    background: #eee;
-    margin: 12px 0;
-  }
-  .arch-section-gap { margin-top: 12px; }
 </style>
 </head>
 <body>
@@ -396,77 +347,63 @@
 
   <!-- 部门架构图模块 -->
   <div class="arch-module">
-    <div class="arch-header" onclick="toggleArchModule()">
-      <div class="arch-header-left">
-        <span style="font-size:18px;">🏗️</span>
-        <div>
-          <div class="arch-header-title">美团部门架构图</div>
-          <div class="arch-header-sub">点击部门芯片查看相关候选人</div>
+    <div class="arch-module-title">🏗️ 美团部门架构<span class="arch-module-sub">点击部门查看相关候选人</span></div>
+    <div class="arch-grid">
+      <!-- 列1：核心本地商业（含商分/平台/LBS） -->
+      <div class="arch-col">
+        <div class="arch-col-title">核心本地商业</div>
+        <div class="arch-chips">
+          <span class="dept-chip" onclick="showArchPanel('点评事业部', ['点评'])">点评事业部</span>
+          <span class="dept-chip" onclick="showArchPanel('到餐事业部', ['到餐'])">到餐事业部</span>
+          <span class="dept-chip" onclick="showArchPanel('服务零售事业部', ['服务零售'])">服务零售事业部</span>
+          <span class="dept-chip" onclick="showArchPanel('酒店旅行', ['酒旅','酒店旅行','住宿'])">酒店旅行</span>
+          <span class="dept-chip" onclick="showArchPanel('外卖事业部', ['外卖'])">外卖事业部</span>
+          <span class="dept-chip" onclick="showArchPanel('到家履约平台', ['到家履约'])">到家履约平台</span>
+          <span class="dept-chip" onclick="showArchPanel('闪购事业部', ['闪购'])">闪购事业部</span>
+          <span class="dept-chip" onclick="showArchPanel('核心本地商业商分', ['核心本地商业'])">核心本地商业商分</span>
+          <span class="dept-chip" onclick="showArchPanel('平台', ['平台'])">平台</span>
+          <span class="dept-chip" onclick="showArchPanel('LBS', ['LBS','lbs'])">LBS</span>
         </div>
       </div>
-      <button class="arch-toggle-btn" id="arch-toggle-label">展开 ▼</button>
+      <!-- 列2：食杂零售 / Keeta / 软硬件服务 -->
+      <div class="arch-col">
+        <div class="arch-col-title">食杂零售</div>
+        <div class="arch-chips">
+          <span class="dept-chip" onclick="showArchPanel('食杂零售', ['快驴','小象','买菜'])">快驴/小象/买菜</span>
+        </div>
+        <div style="margin-top:14px;">
+          <div class="arch-col-title">Keeta</div>
+          <div class="arch-chips">
+            <span class="dept-chip" onclick="showArchPanel('Keeta', ['Keeta','keeta'])">Keeta</span>
+          </div>
+        </div>
+        <div style="margin-top:14px;">
+          <div class="arch-col-title">软硬件服务</div>
+          <div class="arch-chips">
+            <span class="dept-chip" onclick="showArchPanel('软硬件服务', ['软硬件','智能服务'])">软硬件/智能服务</span>
+          </div>
+        </div>
+      </div>
+      <!-- 列3：其他职能平台 -->
+      <div class="arch-col">
+        <div class="arch-col-title">其他职能平台</div>
+        <div class="arch-chips">
+          <span class="dept-chip" onclick="showArchPanel('无人机业务部', ['无人机'])">无人机业务部</span>
+          <span class="dept-chip" onclick="showArchPanel('优选事业部', ['优选'])">优选事业部</span>
+          <span class="dept-chip" onclick="showArchPanel('金融服务', ['金融'])">金融服务</span>
+          <span class="dept-chip" onclick="showArchPanel('用户增长', ['用户增长'])">用户增长</span>
+          <span class="dept-chip" onclick="showArchPanel('新业务', ['新业务','创新'])">新业务/创新</span>
+        </div>
+      </div>
     </div>
-    <div class="arch-body" id="arch-body">
-      <div class="arch-grid">
-        <!-- 左列：核心本地商业 -->
-        <div class="arch-col">
-          <div class="arch-col-title highlight">🔥 核心本地商业</div>
-          <div class="arch-chips">
-            <span class="dept-chip red" onclick="showArchPanel('点评事业部', ['点评'])">点评事业部</span>
-            <span class="dept-chip red" onclick="showArchPanel('到餐事业部', ['到餐'])">到餐事业部</span>
-            <span class="dept-chip red" onclick="showArchPanel('服务零售事业部', ['服务零售'])">服务零售事业部</span>
-            <span class="dept-chip red" onclick="showArchPanel('酒店旅行', ['酒旅','酒店旅行','住宿'])">酒店旅行</span>
-            <span class="dept-chip red" onclick="showArchPanel('外卖事业部', ['外卖'])">外卖事业部</span>
-            <span class="dept-chip red" onclick="showArchPanel('到家履约平台', ['到家履约'])">到家履约平台</span>
-            <span class="dept-chip red" onclick="showArchPanel('闪购事业部', ['闪购'])">闪购事业部</span>
-          </div>
-          <div class="arch-divider"></div>
-          <div class="arch-chips">
-            <span class="dept-chip gray-chip" onclick="showArchPanel('核心本地商业（商分）', ['核心本地商业'])">核心本地商业商分</span>
-            <span class="dept-chip gray-chip" onclick="showArchPanel('平台', ['平台'])">平台</span>
-            <span class="dept-chip gray-chip" onclick="showArchPanel('LBS', ['LBS','lbs'])">LBS</span>
-          </div>
-        </div>
 
-        <!-- 中列：食杂零售 / Keeta / 软硬件服务 -->
-        <div class="arch-col">
-          <div class="arch-col-title gray">食杂零售</div>
-          <div class="arch-chips">
-            <span class="dept-chip gray-chip" onclick="showArchPanel('食杂零售', ['快驴','小象','买菜'])">快驴/小象/买菜</span>
-          </div>
-          <div class="arch-section-gap"></div>
-          <div class="arch-col-title highlight">🌏 Keeta</div>
-          <div class="arch-chips">
-            <span class="dept-chip highlight-chip" onclick="showArchPanel('Keeta', ['Keeta','keeta'])">Keeta</span>
-          </div>
-          <div class="arch-section-gap"></div>
-          <div class="arch-col-title gray">软硬件服务</div>
-          <div class="arch-chips">
-            <span class="dept-chip gray-chip" onclick="showArchPanel('软硬件服务', ['软硬件','智能服务'])">软硬件/智能服务</span>
-          </div>
-        </div>
-
-        <!-- 右列：其他职能平台 -->
-        <div class="arch-col">
-          <div class="arch-col-title gray">其他职能平台</div>
-          <div class="arch-chips vertical">
-            <span class="dept-chip gray-chip" onclick="showArchPanel('无人机业务部', ['无人机'])">无人机业务部</span>
-            <span class="dept-chip gray-chip" onclick="showArchPanel('优选事业部', ['优选'])">优选事业部</span>
-            <span class="dept-chip gray-chip" onclick="showArchPanel('金融服务', ['金融'])">金融服务</span>
-            <span class="dept-chip gray-chip" onclick="showArchPanel('用户增长', ['用户增长'])">用户增长</span>
-            <span class="dept-chip gray-chip" onclick="showArchPanel('新业务', ['新业务','创新'])">新业务/创新</span>
-          </div>
-        </div>
+    <!-- 候选人面板 -->
+    <div class="arch-panel" id="arch-panel">
+      <div class="arch-panel-header">
+        <div class="arch-panel-title" id="arch-panel-title">相关人选</div>
+        <button class="arch-panel-close" onclick="closeArchPanel()">✕ 关闭</button>
       </div>
-
-      <!-- 候选人面板 -->
-      <div class="arch-panel" id="arch-panel">
-        <div class="arch-panel-header">
-          <div class="arch-panel-title" id="arch-panel-title">相关人选</div>
-          <button class="arch-panel-close" onclick="closeArchPanel()">✕ 关闭</button>
-        </div>
-        <div class="arch-panel-list" id="arch-panel-list"></div>
-      </div>
+      <div class="arch-panel-list" id="arch-panel-list"></div>
     </div>
   </div>
 
@@ -1280,18 +1217,7 @@ function toggleOtherDept() {
 
 let currentArchDept = null;
 
-function toggleArchModule() {
-  const body = document.getElementById('arch-body');
-  const label = document.getElementById('arch-toggle-label');
-  if (!body) return;
-  if (body.classList.contains('open')) {
-    body.classList.remove('open');
-    label.textContent = '展开 ▼';
-  } else {
-    body.classList.add('open');
-    label.textContent = '收起 ▲';
-  }
-}
+
 
 function matchDept(person, keywords) {
   const jobs = person.meituan_jobs || [];
@@ -1323,71 +1249,66 @@ function getInterviewStatusColor(status) {
 function showArchPanel(deptName, keywords) {
   // 清除所有 chip 的 active 样式
   document.querySelectorAll('.dept-chip').forEach(c => c.classList.remove('active'));
-  // 给当前 chip 加 active
   event.currentTarget.classList.add('active');
 
   currentArchDept = deptName;
-
   const matched = DATA.filter(p => matchDept(p, keywords));
 
   const titleEl = document.getElementById('arch-panel-title');
   const listEl = document.getElementById('arch-panel-list');
   const panelEl = document.getElementById('arch-panel');
 
-  titleEl.textContent = `${deptName} 相关人选（${matched.length} 人）`;
+  titleEl.textContent = `${deptName} · ${matched.length} 人`;
 
   if (matched.length === 0) {
     listEl.innerHTML = `<div class="arch-panel-empty">暂未找到匹配该部门的候选人</div>`;
   } else {
-    // 表头
-    const header = `
-      <div style="display:grid;grid-template-columns:1.2fr 0.5fr 1.5fr 1.8fr 1.8fr 1.5fr;gap:8px;padding:4px 14px;font-size:11px;color:#999;font-weight:600;letter-spacing:0.5px;">
-        <span>姓名</span>
-        <span>年龄</span>
-        <span>当前美团部门</span>
-        <span>学历·专业·学校</span>
-        <span>最近面试岗位</span>
-        <span>面试状态</span>
-      </div>`;
+    const colWidths = '90px 40px 1fr 90px 90px 1fr';
+    const header = `<div class="arch-panel-header-row" style="grid-template-columns:${colWidths};">
+      <span>姓名</span><span>年龄</span><span>当前部门</span><span>本科</span><span>最高学历</span><span>最近面试岗位</span>
+    </div>`;
 
     const rows = matched.map(p => {
       const ii = p.interviewInfo || {};
       const firstEdu = p.firstEdu || {};
-      // 学历：本科+最高学历（如不同则都显示）
+
+      // 姓名链接
+      const hrUrl = `https://hr.xiaohongshu.com/talent-pool/common/club-recruit?talentId=${p.talentId}`;
+      const name = p.name || '—';
+
+      // 年龄
+      const age = p.age ? `${p.age}` : '—';
+
+      // 当前部门
+      const dept = p.currentDept || (p.meituan_jobs && p.meituan_jobs[0] && p.meituan_jobs[0].dept) || '—';
+
+      // 本科：学校（专业）
       const bkSchool = p.firstSchool || firstEdu.school || '';
-      const bkDeg = firstEdu.degree || '本科';
       const bkMajor = firstEdu.major || '';
+      const bkStr = bkSchool ? (bkMajor ? `${bkSchool}（${bkMajor}）` : bkSchool) : '—';
+
+      // 最高学历：学历·学校
       const highDeg = p.highestDegree || '';
       const highSchool = p.highestSchool || '';
-      let eduStr;
-      if (bkSchool && highSchool && bkSchool !== highSchool) {
-        // 本科和最高学历不同学校
-        eduStr = `${highDeg}·${bkMajor}·${highSchool}（本${bkDeg}@${bkSchool}）`;
-      } else {
-        eduStr = [highDeg, bkMajor, highSchool || bkSchool].filter(Boolean).join('·') || '—';
-      }
-      const dept = p.currentDept || (p.meituan_jobs && p.meituan_jobs[0] && p.meituan_jobs[0].dept) || '—';
-      const status = ii.recentInterviewStatus || '—';
-      const statusColor = getInterviewStatusColor(status);
+      const highStr = (highDeg || highSchool) ? [highDeg, highSchool].filter(Boolean).join('·') : '—';
+
+      // 最近面试岗位
       const recentPos = ii.recentPosition || '—';
-      const age = p.age || '—';
-      const hrUrl = `https://hr.xiaohongshu.com/talent-pool/common/club-recruit?talentId=${p.talentId}`;
-      return `
-        <div class="arch-panel-row" style="grid-template-columns:1.2fr 0.5fr 1.5fr 1.8fr 1.8fr 1.5fr;">
-          <a class="arch-panel-name" href="${hrUrl}" target="_blank" title="在HR系统中查看">${p.name || '—'}</a>
-          <span class="arch-panel-dept">${age}岁</span>
-          <span class="arch-panel-dept" title="${dept}">${dept}</span>
-          <span class="arch-panel-edu" title="${eduStr}">${eduStr}</span>
-          <span class="arch-panel-dept" title="${recentPos}" style="overflow:hidden;text-overflow:ellipsis;white-space:nowrap;">${recentPos}</span>
-          <span class="arch-panel-status" style="color:${statusColor}">${status}</span>
-        </div>`;
+
+      return `<div class="arch-panel-row" style="grid-template-columns:${colWidths};">
+        <a class="arch-panel-name" href="${hrUrl}" target="_blank">${name}</a>
+        <span class="arch-cell-age">${age}</span>
+        <span class="arch-cell-dept" title="${dept}">${dept}</span>
+        <span class="arch-cell-school" title="${bkStr}">${bkStr}</span>
+        <span class="arch-cell-deg">${highStr}</span>
+        <span class="arch-cell-dept" title="${recentPos}">${recentPos}</span>
+      </div>`;
     }).join('');
 
     listEl.innerHTML = header + rows;
   }
 
   panelEl.classList.add('open');
-  // 滚动让面板可见
   setTimeout(() => {
     panelEl.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
   }, 50);
