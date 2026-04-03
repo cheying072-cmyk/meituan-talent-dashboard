@@ -248,9 +248,9 @@
     display: inline-block;
   }
   .arch-col-title.highlight {
-    background: #FFF0EB;
-    color: #FF5E3A;
-    border: 1.5px solid #FF5E3A;
+    background: #E3F2FD;
+    color: #1565C0;
+    border: 1.5px solid #1565C0;
   }
   .arch-col-title.gray {
     background: #F5F5F5;
@@ -279,11 +279,11 @@
     white-space: nowrap;
   }
   .dept-chip.red {
-    background: #FF5E3A;
+    background: #1565C0;
     color: white;
-    border: 1.5px solid #FF5E3A;
+    border: 1.5px solid #1565C0;
   }
-  .dept-chip.red:hover { background: #e04e2f; box-shadow: 0 2px 8px rgba(255,94,58,0.35); }
+  .dept-chip.red:hover { background: #0d47a1; box-shadow: 0 2px 8px rgba(21,101,192,0.35); }
   .dept-chip.gray-chip {
     background: #F0F0F0;
     color: #555;
@@ -291,9 +291,9 @@
   }
   .dept-chip.gray-chip:hover { background: #e0e0e0; box-shadow: 0 2px 6px rgba(0,0,0,0.1); }
   .dept-chip.highlight-chip {
-    background: #FFF0EB;
-    color: #FF5E3A;
-    border: 1.5px solid #FF5E3A;
+    background: #E3F2FD;
+    color: #1565C0;
+    border: 1.5px solid #1565C0;
     font-weight: 700;
   }
   .dept-chip.highlight-chip:hover { background: #ffe0d6; box-shadow: 0 2px 8px rgba(255,94,58,0.25); }
@@ -326,7 +326,7 @@
   .arch-panel-title {
     font-size: 14px;
     font-weight: 700;
-    color: #FF5E3A;
+    color: #1565C0;
   }
   .arch-panel-close {
     background: none;
@@ -338,14 +338,14 @@
     color: #888;
     transition: all 0.15s;
   }
-  .arch-panel-close:hover { border-color: #FF5E3A; color: #FF5E3A; }
+  .arch-panel-close:hover { border-color: #1565C0; color: #1565C0; }
   .arch-panel-list {
     display: grid;
     gap: 6px;
   }
   .arch-panel-row {
     display: grid;
-    grid-template-columns: 1.2fr 2fr 1.8fr 1.5fr;
+    grid-template-columns: 1.2fr 0.5fr 1.5fr 1.8fr 1.8fr 1.5fr;
     align-items: center;
     background: #FFF8F6;
     border: 1px solid #FFD5C8;
@@ -354,10 +354,10 @@
     font-size: 13px;
     gap: 8px;
   }
-  .arch-panel-row:hover { background: #FFF0EB; }
+  .arch-panel-row:hover { background: #E3F2FD; }
   .arch-panel-name {
     font-weight: 700;
-    color: #FF5E3A;
+    color: #1565C0;
     text-decoration: none;
     white-space: nowrap;
   }
@@ -1341,26 +1341,44 @@ function showArchPanel(deptName, keywords) {
   } else {
     // 表头
     const header = `
-      <div style="display:grid;grid-template-columns:1.2fr 2fr 1.8fr 1.5fr;gap:8px;padding:4px 14px;font-size:11px;color:#999;font-weight:600;letter-spacing:0.5px;">
+      <div style="display:grid;grid-template-columns:1.2fr 0.5fr 1.5fr 1.8fr 1.8fr 1.5fr;gap:8px;padding:4px 14px;font-size:11px;color:#999;font-weight:600;letter-spacing:0.5px;">
         <span>姓名</span>
+        <span>年龄</span>
         <span>当前美团部门</span>
-        <span>学历·学校</span>
-        <span>最近面试状态</span>
+        <span>学历·专业·学校</span>
+        <span>最近面试岗位</span>
+        <span>面试状态</span>
       </div>`;
 
     const rows = matched.map(p => {
       const ii = p.interviewInfo || {};
-      const edu = p.firstEdu || {};
-      const eduStr = [p.highestDegree, p.highestSchool].filter(Boolean).join('·') || '—';
+      const firstEdu = p.firstEdu || {};
+      // 学历：本科+最高学历（如不同则都显示）
+      const bkSchool = p.firstSchool || firstEdu.school || '';
+      const bkDeg = firstEdu.degree || '本科';
+      const bkMajor = firstEdu.major || '';
+      const highDeg = p.highestDegree || '';
+      const highSchool = p.highestSchool || '';
+      let eduStr;
+      if (bkSchool && highSchool && bkSchool !== highSchool) {
+        // 本科和最高学历不同学校
+        eduStr = `${highDeg}·${bkMajor}·${highSchool}（本${bkDeg}@${bkSchool}）`;
+      } else {
+        eduStr = [highDeg, bkMajor, highSchool || bkSchool].filter(Boolean).join('·') || '—';
+      }
       const dept = p.currentDept || (p.meituan_jobs && p.meituan_jobs[0] && p.meituan_jobs[0].dept) || '—';
       const status = ii.recentInterviewStatus || '—';
       const statusColor = getInterviewStatusColor(status);
-      const hrUrl = `https://hr.xiaohongshu.com/workbench/social/talent/profile/${p.talentId}`;
+      const recentPos = ii.recentPosition || '—';
+      const age = p.age || '—';
+      const hrUrl = `https://hr.xiaohongshu.com/talent-pool/common/club-recruit?talentId=${p.talentId}`;
       return `
-        <div class="arch-panel-row">
+        <div class="arch-panel-row" style="grid-template-columns:1.2fr 0.5fr 1.5fr 1.8fr 1.8fr 1.5fr;">
           <a class="arch-panel-name" href="${hrUrl}" target="_blank" title="在HR系统中查看">${p.name || '—'}</a>
+          <span class="arch-panel-dept">${age}岁</span>
           <span class="arch-panel-dept" title="${dept}">${dept}</span>
-          <span class="arch-panel-edu">${eduStr}</span>
+          <span class="arch-panel-edu" title="${eduStr}">${eduStr}</span>
+          <span class="arch-panel-dept" title="${recentPos}" style="overflow:hidden;text-overflow:ellipsis;white-space:nowrap;">${recentPos}</span>
           <span class="arch-panel-status" style="color:${statusColor}">${status}</span>
         </div>`;
     }).join('');
